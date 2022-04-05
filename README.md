@@ -24,10 +24,11 @@ Nodejs training project which includes
 2. [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
 3. Authentication 
 4. Models
-5. Migrations
-6. Controllers
-7. Helpers
-8. Validations
+5. Relations
+6. Migrations
+7. Controllers
+8. Helpers
+9. Validations
 
 <!-- LICENSE -->
 ## License
