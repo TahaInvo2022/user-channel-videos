@@ -6,11 +6,11 @@ const {getAllChannels, createChannel, showChannel, deleteChannel, updateChannel}
 
 // middleware
 const verifyToken = require('../middleware/auth')
-
-router.get('/', verifyToken, getAllChannels);
-router.get('/:id', verifyToken, showChannel);
-router.post('/create', verifyToken, createChannel);
-router.put('/update/:id', verifyToken, updateChannel);
-router.delete('/delete/:id', verifyToken, deleteChannel);
+router.use(verifyToken)
+router.get('/', getAllChannels);
+router.get('/:id', showChannel);
+router.post('/create', createChannel);
+router.put('/update/:id', updateChannel);
+router.delete('/delete/:id', deleteChannel);
 
 module.exports = router;

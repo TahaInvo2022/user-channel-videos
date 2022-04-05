@@ -6,10 +6,10 @@ const {getAllUsers, showUser, updateUser, deleteUser} = require('../controllers/
 
 // middleware
 const verifyToken = require('../middleware/auth');
-
-router.get('/', verifyToken, getAllUsers);
-router.get('/:id', verifyToken, showUser);
-router.put('/update/:id', verifyToken, updateUser);
-router.delete('/delete/:id', verifyToken, deleteUser);
+router.use(verifyToken)
+router.get('/', getAllUsers);
+router.get('/:id', showUser);
+router.put('/update/:id', updateUser);
+router.delete('/delete/:id', deleteUser);
 
 module.exports = router;
