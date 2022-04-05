@@ -14,14 +14,14 @@ Follow the below steps to install this project:
 <!-- Name -->
 ## Name
 
-Nodejs Api Project
+User-channels-videos
 
 ## Description
 
 Nodejs training project which includes
 
-1. [https://sequelize.org/](Sequelize)
-2. [https://www.npmjs.com/package/jsonwebtoken](Jsonwebtoken)
+1. (https://sequelize.org/)[Sequelize]
+2. (https://www.npmjs.com/package/jsonwebtoken)[Jsonwebtoken]
 3. Authentication 
 4. Models
 5. Migrations
