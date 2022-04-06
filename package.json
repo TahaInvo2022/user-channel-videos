@@ -9,7 +9,8 @@
     "db-seed": "sequelize db:seed:all",
     "db-migrate": "sequelize db:migrate",
     "db-migrate-undoAll": "sequelize db:migrate:undo:all",
-    "db-migrate-undo": "sequelize db:migrate:undo"
+    "db-migrate-undo": "sequelize db:migrate:undo",
+    "make-migration": "sequelize-cli model:generate --name"
   },
   "keywords": [
     "Node",
@@ -20,9 +21,11 @@
   "dependencies": {
     "bcrypt": "^5.0.1",
     "body-parser": "^1.20.0",
+    "csvtojson": "^2.0.10",
     "dotenv": "^16.0.0",
     "express": "^4.17.3",
     "express-validator": "^5.3.1",
+    "fast-csv": "^4.3.6",
     "joi": "^17.6.0",
     "jsonwebtoken": "^8.5.1",
     "nodemon": "^2.0.15",
