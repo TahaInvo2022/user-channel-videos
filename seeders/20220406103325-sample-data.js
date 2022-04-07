@@ -1,8 +1,8 @@
 'use strict';
 const fs = require('fs');
 const path = require('path');
-// const csv = require('fast-csv');
-const csv=require('csvtojson');
+const csv = require('fast-csv');
+// const csv=require('csvtojson');
 
 
 
@@ -17,49 +17,40 @@ module.exports = {
      *   isBetaMember: false
      * }], {});
     */
-   console.log("helllooo i am here", path.resolve(__dirname,'..','assets','sample_100data.csv'));
-    // try {
-      // console.log("hello i am here inside row");
-      // console.log( fs.createReadStream(path.resolve(__dirname,'..','assets','sample_100data.csv'))
-      // .pipe(csv.parse())
-      // .on('error', error => console.log(error))
-      // .on('data', row => {
-      //   console.log("hello i am here inside row", row);
-        // return queryInterface.bulkInsert('Users', [{
-          
-        //   addressOne: row[0],
-        //   type: row[1],
-        //   name: row[2],
-        //   east: row[3],
-        //   west: row[4],
-        //   north: row[5],
-        //   south: row[6],
-        //   street: row[7],
-        //   shopName: row[8],
-        //   discount: row[9],
-        //   createdAt: new Date(),
-        //   updatedAt: new Date()
-        // }]);
-      // })
-      // .on('end', rowCount => console.log(`Parsed ${rowCount} rows`)))
-    // } catch (error) {
-    //   console.log(error)
-    // }
+  //  console.log("path consoling ====> ", path.resolve(__dirname,'..','assets','sample_100data.csv'));
+    try {
+      // console.log("inside try");
+    fs.createReadStream(path.resolve(__dirname,'..','assets','sample_100data.csv'))
+      .pipe(csv.parse({
+        delimiter: '\t', 
+        endLine: '\n', 
+        escapeChar: '"', 
+        enclosedChar: '"'
+    }))
+      .on('error', error => console.log(error))
+      .on('data', await function(row){
+        console.log("row consoling ======>", row);
+        
+      })
+      .on('done', rowCount => console.log(`Parsed ${rowCount} rows`))
+    } catch (error) {
+      console.log(error)
+    }
 
 
-    console.log(csv()
-    .fromString(path.resolve(__dirname,'..','assets','sample_100data.csv').toString()).on('json', (user) => {
-      console.log(user);
-  }))
+  //   console.log(csv()
+  //   .fromString(path.resolve(__dirname,'..','assets','sample_100data.csv').toString()).on('json', (user) => {
+  //     console.log(user);
+  // }))
 
-    csv()
-    .fromString(path.resolve(__dirname,'..','assets','sample_100data.csv'))
-    .on('json', (user) => {
-        console.log(user);
-    })
-    .on('done', () => {
-        console.log('done parsing');
-    });
+    // csv()
+    // .fromString(path.resolve(__dirname,'..','assets','sample_100data.csv'))
+    // .on('json', await function(user){
+    //     console.log(user);
+    // })
+    // .on('done', () => {
+    //     console.log('done parsing');
+    // });
      
   },
 
