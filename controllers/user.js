@@ -3,6 +3,76 @@ const {successResponse, errorResponse} = require('../helpers/responseHelper');
 const {validateUserUpdate} = require('../validations/validation')
 
 
+/**
+ * @swagger
+ * components:
+ *   schemas:
+ *     User:
+ *       type: object
+ *       required:
+ *         - firstName
+ *         - lastName
+ *         - email
+ *         - password
+ *       properties:
+ *         id:
+ *           type: integer
+ *           description: The Auto-generated id of a post
+ *         firstName:
+ *           type: string
+ *           description: first name of the user
+ *         lastName:
+ *           type: string
+ *           description: last name of the user
+ *         email:
+ *           type: string
+ *           descripton: email of the user
+ *         password:
+ *           type: string
+ *           descripton: password of the user
+ *       example:
+ *         id: 1
+ *         firstName: test
+ *         lastName: test
+ *         email: test@test.com
+ *         password: asd123
+ *
+ */
+
+/**
+ * 
+ * @swagger
+ * tags:
+ *  name: User
+ *  description: The user managing API
+ */
+
+/**
+ * 
+ * @swagger
+ * 
+ * /users:
+ *  get:
+ *   tags: [User]
+ *   description: Use get all users
+ *   parameters:
+ *     - in : header
+ *       name: x-access-token
+ *       description: Authentication token
+ *       schema:
+ *         type: string
+ *       required: true
+ *   responses:
+ *    200:
+ *     description: All users are fetched
+ *     content:
+ *      application/json:
+ *        schema:
+ *          type: array
+ *          items:
+ *            $ref: '#/components/schemas/User'
+ */
+
 // Get all Users 
 exports.getAllUsers = async (req, res) => {
 
@@ -31,6 +101,36 @@ exports.getAllUsers = async (req, res) => {
 
 }
 
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   get:
+ *     summary: gets users by id
+ *     tags: [User]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id of user
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : header
+ *         name: x-access-token
+ *         description: Authentication token
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: users by its id
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       400:
+ *         description: User can not be found
+ */
 // Get one User 
 exports.showUser = async (req, res) => {
 
@@ -64,7 +164,41 @@ exports.showUser = async (req, res) => {
 }
 
 
-
+/**
+ * @swagger
+ * /users/{id}:
+ *   put:
+ *     summary: gets users by id
+ *     tags: [User]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id of user
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : header
+ *         name: x-access-token
+ *         description: Authentication token
+ *         schema:
+ *           type: string
+ *         required: true
+ *       - in: "body"
+ *         name: "body"
+ *         description: "User data for updation"
+ *         required: true
+ *         schema:
+ *          $ref: "#/components/schemas/User"
+ *     responses:
+ *       200:
+ *         description: User updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               $ref: '#/components/schemas/User'
+ *       400:
+ *         description: User can not be found
+ */
 // Update user
 exports.updateUser =  async (req, res) => {
     
@@ -103,6 +237,33 @@ exports.updateUser =  async (req, res) => {
 }
 
 
+
+
+/**
+ * @swagger
+ * /users/{id}:
+ *   delete:
+ *     summary: gets users by id
+ *     tags: [User]
+ *     parameters:
+ *       - in : path
+ *         name: id
+ *         description: id of user
+ *         schema:
+ *           type: integer
+ *         required: true
+ *       - in : header
+ *         name: x-access-token
+ *         description: Authentication token
+ *         schema:
+ *           type: string
+ *         required: true
+ *     responses:
+ *       200:
+ *         description: User deleted successfully
+ *       400:
+ *         description: User can not be found
+ */
 // delete user 
 
 exports.deleteUser = async (req, res) => {

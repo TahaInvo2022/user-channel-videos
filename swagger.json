@@ -1,0 +1,17 @@
+{
+    
+    "definition":{
+        "info": {
+            "version": "1.0.0",
+            "title": "User Channel Video System",
+            "description": "User Channel Video APIs",
+            "license": {
+                "name": "MIT",
+                "url": "https://opensource.org/licenses/MIT"
+                
+            },
+            "servers": ["http://localhost:3000"]
+        }
+    },
+    "apis": ["app.js"]
+  }

@@ -7,6 +7,9 @@ const {getAllUsers, showUser, updateUser, deleteUser} = require('../controllers/
 // middleware
 const verifyToken = require('../middleware/auth');
 router.use(verifyToken)
+
+
+
 router.get('/', getAllUsers);
 router.get('/:id', showUser);
 router.put('/update/:id', updateUser);
