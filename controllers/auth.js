@@ -18,10 +18,12 @@ const {validateLogincredentials, validateUserSchema} = require('../validations/v
  *   post:
  *     summary: User Login
  *     tags: [Login/Register]
- *     parameters:
- *       - in: "body"
- *         name: "credentials"
- *         description: "User credentials"
+ *     consumes:
+ *      - application/json
+ *     requestBody:
+ *       required: true
+ *       content:
+ *        application/json: 
  *         schema:
  *          type: object
  *          required:
@@ -49,7 +51,6 @@ const {validateLogincredentials, validateUserSchema} = require('../validations/v
  */
 // Get all Users 
 exports.doLogin = async (req, res) => {
-
       // Our login logic starts here
     try {
         // Get user input

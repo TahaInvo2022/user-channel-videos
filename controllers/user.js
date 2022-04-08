@@ -166,7 +166,7 @@ exports.showUser = async (req, res) => {
 
 /**
  * @swagger
- * /users/{id}:
+ * /users/update/{id}:
  *   put:
  *     summary: gets users by id
  *     tags: [User]
@@ -183,12 +183,20 @@ exports.showUser = async (req, res) => {
  *         schema:
  *           type: string
  *         required: true
- *       - in: "body"
- *         name: "body"
- *         description: "User data for updation"
- *         required: true
+ *     requestBody:
+ *       required: true
+ *       content:
+ *        application/json: 
  *         schema:
- *          $ref: "#/components/schemas/User"
+ *          type: object
+ *          required:
+ *           - firstName
+ *           - lastName
+ *          properties:
+ *           firstName:
+ *            type: string
+ *           lastName:
+ *            type: string
  *     responses:
  *       200:
  *         description: User updated successfully
@@ -241,7 +249,7 @@ exports.updateUser =  async (req, res) => {
 
 /**
  * @swagger
- * /users/{id}:
+ * /users/delete/{id}:
  *   delete:
  *     summary: gets users by id
  *     tags: [User]
