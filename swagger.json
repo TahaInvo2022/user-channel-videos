@@ -1,17 +1,454 @@
 {
-    
-    "definition":{
-        "info": {
-            "version": "1.0.0",
-            "title": "User Channel Video System",
-            "description": "User Channel Video APIs",
-            "license": {
-                "name": "MIT",
-                "url": "https://opensource.org/licenses/MIT"
-                
+    "openapi": "3.0.0",
+    "info": {
+      "title": "User Channel Video System",
+      "description": "User Channel Video APIs",
+      "version": "1.0.0",
+      "contact": {
+        "name": "Taha Shahid",
+        "email": "taha.shahid@invozone.com"
+      }
+    },
+    "tags": [
+        {
+            "name": "Login/Register",
+            "description": "Login ap[i for the user"
+        },
+        {
+          "name": "Users",
+          "description": "List of user related APIs"
+        },
+        {
+            "name": "Channels",
+            "description": "List of channel related APIs"
+        }
+        
+        
+    ],
+    "servers": [
+        {
+            "url": "http://localhost:3000"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "User":{
+                "type": "object",
+                "required": [
+                    "firstName",
+                    "lastName",
+                    "email",
+                    "password"
+                ],
+                "properties":{
+                    "id": {
+                        "type": "integer",
+                        "description": "The Auto-generated id of a post"
+                    },    
+                    "firstName":{
+                        "type": "string",
+                        "description": "first name of the user"
+                    },
+                    "lastName":{
+                        "type": "string",
+                        "description": "last name of the user"
+                    },
+                    "email":{
+                        "type": "string",
+                        "description": "email of the user"
+                    },
+                    "password":{
+                        "type": "string",
+                        "description": "password of the user"
+                    },
+                    "createdAt":{
+                        "type": "date",
+                        "description": "creation time of user"
+                    },
+                    "updatedAt":{
+                        "type": "date",
+                        "description": "updated time of user"
+                    }
+
+                },
+                "example":{
+                    "id":1,
+                    "firstName": "admin",
+                    "lastName": "admin",
+                    "email" : "admin@admin.com",
+                    "password": "password"
+                }
             },
-            "servers": ["http://localhost:3000"]
+            "Channel":{
+                "type": "object",
+                "required": [
+                    "title",
+                    "User_id"
+                ],
+                "properties":{
+                    "id": {
+                        "type": "integer",
+                        "description": "The Auto-generated id of a post"
+                    },    
+                    "title":{
+                        "type": "string",
+                        "description": "title of the channel"
+                    },
+                    "User_id":{
+                        "type": "integer",
+                        "description": "User id for the association with user"
+                    },
+                    "createdAt":{
+                        "type": "date",
+                        "description": "creation time of user"
+                    },
+                    "updatedAt":{
+                        "type": "date",
+                        "description": "updated time of user"
+                    }
+
+                },
+                "example":{
+                    "id":1,
+                    "title": "admin",
+                    "User_id": 1
+                }
+            }
         }
     },
-    "apis": ["app.js"]
-  }
+    "paths":{
+        "/auth/login": {
+            "post": {
+                "tags": ["Login/Register"],
+                "description": "Login user",
+                "requestBody": {
+                    "content": {
+                        "application/json":{
+                            "schema": {
+                                "type": "object",
+                                "required": ["email", "password"],
+                                "properties": {
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "password": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User loggedin successfully",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties":{
+                                        "code": {
+                                            "type": "integer"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data":{
+                                            "$ref": "#/components/schemas/User"
+                                        },
+                                        "token": {
+                                            "type": "string"
+                                        }
+                                    } 
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users":{
+            "get":{
+                "tags":["Users"],
+                "description": "Use get all users",
+                "parameters" : [{
+                    "in": "header",
+                    "name": "x-access-token",
+                    "description": "Authentication token",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "All users are fetched",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties":{
+                                        "code": {
+                                            "type": "integer"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "users":{
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                            
+                                        }
+                                    }   
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/{id}":{
+            "get":{
+                "tags":["Users"],
+                "description": "Use get all users",
+                "parameters" : [{
+                        "in": "header",
+                        "name": "x-access-token",
+                        "description": "Authentication token",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of the user",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User fetched successfully",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                        "properties":{
+                                            "code": {
+                                                "type": "integer"
+                                            },
+                                            "message": {
+                                                "type": "string"
+                                            },
+                                            "data":{
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        } 
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/update/{id}":{
+            "put":{
+                "tags":["Users"],
+                "description": "Update user information",
+                "parameters" : [{
+                        "in": "header",
+                        "name": "x-access-token",
+                        "description": "Authentication token",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of the user",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content":{
+                    "application/json":{
+                        "schema": {
+                            "type": "object",
+                            "required": ["firstName", "lastName"],
+                            "properties": {
+                                "firstName": {
+                                    "type": "string"
+                                },
+                                "lastName": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    }  
+                    }
+                        
+                },    
+                "responses": {
+                    "200": {
+                        "description": "User updated successfully",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    
+                                        "properties":{
+                                            "code": {
+                                                "type": "integer"
+                                            },
+                                            "message":{
+                                                "type": "string"
+                                            },
+                                            "data":{
+                                                "$ref": "#/components/schemas/User"
+                                            }
+                                        } 
+                                    
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/users/delete/{id}":{
+            "delete":{
+                "tags":["Users"],
+                "description": "Delete user by id",
+                "parameters" : [{
+                        "in": "header",
+                        "name": "x-access-token",
+                        "description": "Authentication token",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "required": true
+                    },
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "description": "Id of the user",
+                        "schema": {
+                            "type":"integer"
+                        },
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User Deleted successfully"  
+                    }
+                }
+            }
+        },
+        "/channels":{
+            "get":{
+                "tags":["Channels"],
+                "description": "Use get all channels",
+                "parameters" : [{
+                    "in": "header",
+                    "name": "x-access-token",
+                    "description": "Authentication token",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "required": true
+                }],
+                "responses": {
+                    "200": {
+                        "description": "All channels are fetched",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties":{
+                                        "code": {
+                                            "type": "integer"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "channels":{
+                                            "type": "array",
+                                            "items": {
+                                                "$ref": "#/components/schemas/Channel"
+                                            }
+                                            
+                                        }
+                                    }   
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/channels/{id}":{
+            "get":{
+                "tags":["Channels"],
+                "description": "Use get one channel",
+                "parameters" : [{
+                    "in": "header",
+                    "name": "x-access-token",
+                    "description": "Authentication token",
+                    "schema": {
+                        "type": "string"
+                    },
+                    "required": true
+                },
+                {
+                    "in": "path",
+                    "name": "id",
+                    "description": "Id of the channel",
+                    "schema": {
+                        "type":"integer"
+                    },
+                    "required": true
+                }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Channel is fetched",
+                        "content":{
+                            "application/json":{
+                                "schema":{
+                                    "type": "object",
+                                    "properties":{
+                                        "code": {
+                                            "type": "integer"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "data":{
+                                            "type": "object",
+                                            "$ref": "#/components/schemas/Channel"
+                                            
+                                        }
+                                    }   
+                                } 
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}

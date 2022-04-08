@@ -15,28 +15,28 @@ dotEnv.config();
 
 const PORT = process.env.PORT || 5000;
 
-const option = {
-    definition:{
-        openapi:"3.0.0",
-        info: {
-            version: "1.0.0",
-            title: "User Channel Video System",
-            description: "User Channel Video APIs",
+// const option = {
+//     definition:{
+//         openapi:"3.0.0",
+//         info: {
+//             version: "1.0.0",
+//             title: "User Channel Video System",
+//             description: "User Channel Video APIs",
             
             
-        },
-        servers: [
-            {
-                url: "http://localhost:3000"
-            }
-        ],
-    },
-    apis: ["./controllers/*.js"]
-}
+//         },
+//         servers: [
+//             {
+//                 url: "http://localhost:3000"
+//             }
+//         ],
+//     },
+//     apis: ["./controllers/*.js"]
+// }
 
-const swaggerDocumentObj = swaggerJsDoc(option);
+// const swaggerDocumentObj = swaggerJsDoc(option);
 
-app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocumentObj));
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 app.use('/', indexRoute);
 

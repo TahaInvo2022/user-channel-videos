@@ -36,7 +36,7 @@ exports.showChannel = async (req, res) => {
 
     try {
         const {id} = req.params
-        const users = await Channel.findAll({
+        const users = await Channel.findOne({
             include:[
                 {
                     model: User,

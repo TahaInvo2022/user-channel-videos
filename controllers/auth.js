@@ -4,51 +4,7 @@ const jwt = require('jsonwebtoken');
 const {successResponse, errorResponse} = require('../helpers/responseHelper');
 const {validateLogincredentials, validateUserSchema} = require('../validations/validation')
 
-/**
- * 
- * @swagger
- * tags:
- *  name: Login/Register
- *  description: Login/Register APIs
- */
 
-/**
- * @swagger
- * /auth/login:
- *   post:
- *     summary: User Login
- *     tags: [Login/Register]
- *     consumes:
- *      - application/json
- *     requestBody:
- *       required: true
- *       content:
- *        application/json: 
- *         schema:
- *          type: object
- *          required:
- *           - email
- *           - password
- *          properties:
- *           email:
- *            type: string
- *           password:
- *            type: string
- *     responses:
- *       200:
- *         description: User loggedin successfully
- *         content:
- *           application/json:
- *             schema:
- *               type: object
- *               properties:
- *                  token:
- *                   type: string
- *                  user:
- *                   $ref: '#/components/schemas/User'
- *       400:
- *         description: Invalid credentials
- */
 // Get all Users 
 exports.doLogin = async (req, res) => {
       // Our login logic starts here
@@ -89,6 +45,8 @@ exports.doLogin = async (req, res) => {
     }
     // Our register logic ends here
 }
+
+
 // Create User
 exports.registerUser =  async (req, res) => {
     
