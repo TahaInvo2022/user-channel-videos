@@ -20,15 +20,17 @@ User-channels-videos
 
 Nodejs training project which includes
 
-1. [Sequelize](https://sequelize.org/)
-2. [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
-3. Authentication 
-4. Models
-5. Relations
-6. Migrations
-7. Controllers
-8. Helpers
-9. Validations
+1.  [Sequelize](https://sequelize.org/)
+2.  [Jsonwebtoken](https://www.npmjs.com/package/jsonwebtoken)
+3.  Authentication 
+4.  Models
+5.  Relations
+6.  Migrations
+7.  Controllers
+8.  Helpers
+9.  Validations
+10. Seeders
+11. Swagger
 
 <!-- LICENSE -->
 ## License
