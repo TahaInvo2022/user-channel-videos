@@ -2,6 +2,7 @@ const {User} = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const {successResponse, errorResponse} = require('../helpers/responseHelper');
+const {sendWelcomeEmail} = require('../helpers/mailer')
 const {validateLogincredentials, validateUserSchema} = require('../validations/validation')
 
 
@@ -36,6 +37,7 @@ exports.doLogin = async (req, res) => {
             }
         );
 
+        
         
         return successResponse(req, res, "User loggedin  successfully", user, token);
         }
@@ -79,11 +81,14 @@ exports.registerUser =  async (req, res) => {
             expiresIn: "2h",
             }
         );
-        
+
+        // send user email
+        sendWelcomeEmail(newUser)
 
         return successResponse(req, res, "User created successfully", newUser, token);
 
     } catch (error) {
+        console.log(error)
         if(error) return errorResponse(req, res, error.message, 400);
     }
 

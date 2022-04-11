@@ -31,6 +31,10 @@ Nodejs training project which includes
 9.  Validations
 10. Seeders
 11. Swagger
+12. Hooks/Triggers
+13. Events
+14. Email integration Node-mailer
+15. Cron Jobs
 
 <!-- LICENSE -->
 ## License
