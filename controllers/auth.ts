@@ -1,3 +1,4 @@
+import { Request, Response } from 'express';
 const {User} = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
@@ -7,7 +8,7 @@ const {validateLogincredentials, validateUserSchema} = require('../validations/v
 
 
 // Get all Users 
-exports.doLogin = async (req, res) => {
+exports.doLogin = async (req: Request, res: Response) => {
       // Our login logic starts here
     try {
         // Get user input
@@ -42,7 +43,7 @@ exports.doLogin = async (req, res) => {
         return successResponse(req, res, "User loggedin  successfully", user, token);
         }
         return errorResponse(req, res, "Invalid Credentials", 400);
-    } catch (err) {
+    } catch (error: any) {
         if(error) return errorResponse(req, res, error.message, 400);
     }
     // Our register logic ends here
@@ -50,7 +51,7 @@ exports.doLogin = async (req, res) => {
 
 
 // Create User
-exports.registerUser =  async (req, res) => {
+exports.registerUser =  async (req: Request, res: Response) => {
     
     try {
         
@@ -87,7 +88,7 @@ exports.registerUser =  async (req, res) => {
 
         return successResponse(req, res, "User created successfully", newUser, token);
 
-    } catch (error) {
+    } catch (error: any) {
         console.log(error)
         if(error) return errorResponse(req, res, error.message, 400);
     }

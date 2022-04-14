@@ -35,6 +35,7 @@ Nodejs training project which includes
 13. Events
 14. Email integration Node-mailer
 15. Cron Jobs
+16. Simplejs to Typescrpt conversion
 
 <!-- LICENSE -->
 ## License

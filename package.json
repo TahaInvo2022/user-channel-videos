@@ -39,6 +39,7 @@
     "xlsx2json": "^1.0.0"
   },
   "devDependencies": {
+    "@types/express": "^4.17.13",
     "sequelize-cli": "^6.4.1"
   }
 }

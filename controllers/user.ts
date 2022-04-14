@@ -1,10 +1,11 @@
+import { Request, Response } from 'express';
 const {User, Channel} = require('../models');
 const {successResponse, errorResponse} = require('../helpers/responseHelper');
 const {validateUserUpdate} = require('../validations/validation')
 
 
 // Get all Users 
-exports.getAllUsers = async (req, res) => {
+exports.getAllUsers = async (req:Request, res:Response) => {
 
     try {
         const users = await User.findAll({
@@ -20,7 +21,7 @@ exports.getAllUsers = async (req, res) => {
             "All users are fetched",
             users,
           )
-    } catch (error) {
+    } catch (error: any) {
         return errorResponse(
             req,
             res,
@@ -33,7 +34,7 @@ exports.getAllUsers = async (req, res) => {
 
 
 // Get one User 
-exports.showUser = async (req, res) => {
+exports.showUser = async (req:Request, res:Response) => {
 
     try {
         const {id} = req.params
@@ -61,7 +62,7 @@ exports.showUser = async (req, res) => {
             "One user is fetched",
             users,
           )
-    } catch (error) {
+    } catch (error: any) {
         return errorResponse(
             req,
             res,
@@ -74,7 +75,7 @@ exports.showUser = async (req, res) => {
 
 
 // Update user
-exports.updateUser =  async (req, res) => {
+exports.updateUser =  async (req:Request, res:Response) => {
     
     try {
         const {id} = req.params;
@@ -104,7 +105,7 @@ exports.updateUser =  async (req, res) => {
 
         return successResponse(req, res, "User updated successfully");
 
-    } catch (error) {
+    } catch (error: any) {
         if(error) return errorResponse(req, res, error.message, 400);
     }
 
@@ -114,7 +115,7 @@ exports.updateUser =  async (req, res) => {
 
 // delete user 
 
-exports.deleteUser = async (req, res) => {
+exports.deleteUser = async (req:Request, res:Response) => {
     
     try {
         const {id} = req.params;
@@ -136,7 +137,7 @@ exports.deleteUser = async (req, res) => {
 
         return successResponse(req, res, "User deleted successfully");
 
-    } catch (error) {
+    } catch (error: any) {
         if(error) return errorResponse(req, res, error.message, 400);
     }
 

@@ -1,6 +1,6 @@
 const Joi = require('joi');
 
-exports.validateUserSchema = (usr) => {
+exports.validateUserSchema = (usr:any) => {
    
     const schema = Joi.object({
         firstName: Joi.string().min(4).max(20).required(),
@@ -13,7 +13,7 @@ exports.validateUserSchema = (usr) => {
 
 }
 
-exports.validateUserUpdate = (usr) => {
+exports.validateUserUpdate = (usr:any) => {
     const schema = Joi.object({
         firstName: Joi.string().min(4).max(20).required(),
         lastName: Joi.string().min(4).max(20).required()
@@ -22,7 +22,7 @@ exports.validateUserUpdate = (usr) => {
     return schema.validate(usr);
 }
 
-exports.validateChannelSchema = (usr) => {
+exports.validateChannelSchema = (usr:any) => {
     const schema = Joi.object({
         title: Joi.string().min(4).max(20).required(),
         userId: Joi.number().required()
@@ -31,7 +31,7 @@ exports.validateChannelSchema = (usr) => {
     return schema.validate(usr);
 }
 
-exports.validateLogincredentials = (usr) => {
+exports.validateLogincredentials = (usr:any) => {
     const schema = Joi.object({
         email: Joi.string().email().required(),
         password: Joi.string().required()

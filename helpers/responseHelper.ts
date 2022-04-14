@@ -1,8 +1,11 @@
+
+import { Request, Response } from 'express';
+
 const successResponse = (
-    req,
-    res,
+    req: Request,
+    res:Response,
     message = "",
-    data,
+    data:any,
     token = "",
     code = 200
   ) =>
@@ -15,8 +18,8 @@ const successResponse = (
     });
   
   const errorResponse = (
-    req,
-    res,
+    req:Request,
+    res:Response,
     errorMessage = "Something went wrong",
     code = 500,
     error = {}

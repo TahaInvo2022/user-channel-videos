@@ -1,7 +1,7 @@
-const Mail = require('../mail');
+// const Mail = require('../mail');
+import Mail from "../mail";
 
-
-exports.sendWelcomeEmail = (data) => {
+exports.sendWelcomeEmail = (data:any) => {
     var mailOptions = {
         from: 'tahashahid292@gmail.com',
         to: data.email,
@@ -9,7 +9,7 @@ exports.sendWelcomeEmail = (data) => {
         text: 'Hi there. This email was automatically sent through cron jobs. I have saved ethereal info in .env file'
       };
       
-      Mail.sendMail(mailOptions, (error) => {
+      Mail.sendMail(mailOptions, (error:any) => {
         if (error) {
           console.log("error is:", error);
           throw error;

@@ -1,10 +1,11 @@
+import { Request, Response } from 'express';
 const {User, Channel} = require('../models');
 const {successResponse, errorResponse} = require('../helpers/responseHelper');
 const {validateChannelSchema} = require('../validations/validation')
 
 
 // Get all Channel 
-exports.getAllChannels = async (req, res) => {
+exports.getAllChannels = async (req:Request, res:Response) => {
 
     try {
         const channels = await Channel.findAll({
@@ -20,7 +21,7 @@ exports.getAllChannels = async (req, res) => {
             "All channels are fetched",
             channels,
           )
-    } catch (error) {
+    } catch (error: any) {
         return errorResponse(
             req,
             res,
@@ -32,7 +33,7 @@ exports.getAllChannels = async (req, res) => {
 }
 
 // Get one Channel 
-exports.showChannel = async (req, res) => {
+exports.showChannel = async (req:Request, res:Response) => {
 
     try {
         const {id} = req.params
@@ -52,7 +53,7 @@ exports.showChannel = async (req, res) => {
             "One Channel is fetched",
             users,
           )
-    } catch (error) {
+    } catch (error: any) {
         return errorResponse(
             req,
             res,
@@ -64,7 +65,7 @@ exports.showChannel = async (req, res) => {
 }
 
 // Create Channel
-exports.createChannel =  async (req, res) => {
+exports.createChannel =  async (req:Request, res:Response) => {
     
     try {
         
@@ -87,14 +88,14 @@ exports.createChannel =  async (req, res) => {
 
         return successResponse(req, res, "Channel created successfully", newChannel);
 
-    } catch (error) {
+    } catch (error: any) {
         if(error) return errorResponse(req, res, error.message, 400);
     }
 
 }
 
 // Update Channel
-exports.updateChannel =  async (req, res) => {
+exports.updateChannel =  async (req:Request, res:Response) => {
     
     try {
         const {id} = req.params;
@@ -125,7 +126,7 @@ exports.updateChannel =  async (req, res) => {
 
         return successResponse(req, res, "Channel updated successfully");
 
-    } catch (error) {
+    } catch (error: any) {
         if(error) return errorResponse(req, res, error.message, 400);
     }
 
@@ -134,7 +135,7 @@ exports.updateChannel =  async (req, res) => {
 
 // delete Channel 
 
-exports.deleteChannel = async (req, res) => {
+exports.deleteChannel = async (req:Request, res:Response) => {
     
     try {
         const {id} = req.params;
@@ -156,7 +157,7 @@ exports.deleteChannel = async (req, res) => {
 
         return successResponse(req, res, "Channel deleted successfully");
 
-    } catch (error) {
+    } catch (error: any) {
         if(error) return errorResponse(req, res, error.message, 400);
     }
 

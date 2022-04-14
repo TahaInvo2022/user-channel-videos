@@ -1,8 +1,9 @@
+import { Request, Response, NextFunction } from 'express';
 const jwt = require("jsonwebtoken");
 const { errorResponse } = require("../helpers/responseHelper");
 const config = process.env;
 
-const verifyToken = (req, res, next) => {
+const verifyToken = (req:Request|any, res:Response, next:NextFunction) => {
   const token =
     req.body.token || req.query.token || req.headers["x-access-token"];
 
@@ -12,7 +13,7 @@ const verifyToken = (req, res, next) => {
   try {
     const decoded = jwt.verify(token, config.TOKEN_KEY);
     req.user = decoded;
-  } catch (err) {
+  } catch (err:any) {
     return errorResponse(req, res, "Invalid Token", 401);
   }
   return next();
